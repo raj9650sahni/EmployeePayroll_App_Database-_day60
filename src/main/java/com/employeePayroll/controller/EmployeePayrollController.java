@@ -20,8 +20,11 @@ import com.employeePayroll.DTO.ResponseDTO;
 import com.employeePayroll.model.EmployeePayrollData;
 import com.employeePayroll.service.IEmployeepayrollService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/employeepayrollservice")
+@Slf4j
 public class EmployeePayrollController {
 	
 	@Autowired
@@ -46,6 +49,7 @@ public class EmployeePayrollController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@Valid  @RequestBody EmployeePayrollDTO emppayrollDTO) {
+		log.debug("Employee DTO: " + emppayrollDTO.toString());
 		EmployeePayrollData employeePayrolldata=null;
 		employeePayrolldata = employeepayrollService.createEmployeePayrollData(emppayrollDTO);
 		ResponseDTO responseDto = new ResponseDTO("Employee created successfully", employeePayrolldata);
