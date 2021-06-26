@@ -2,6 +2,8 @@ package com.employeePayroll.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +47,15 @@ public class EmployeePayrollController {
 		ResponseDTO responseDto = new ResponseDTO("Get call Success", empPayrolldata);
 		return new ResponseEntity<ResponseDTO>(responseDto ,HttpStatus.OK);
 		
+	}
+	
+	
+	@GetMapping("/department/{department}")
+	public ResponseEntity<ResponseDTO> getEmployeePayrollData(@PathVariable("department") String department) {
+		List<EmployeePayrollData> empList =null;
+		empList = employeepayrollService.getEmployeesByDepartment(department);
+		ResponseDTO responseDTO = new ResponseDTO("Get Call Id for Successfull", empList);
+		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}
 	
 	@PostMapping("/create")
